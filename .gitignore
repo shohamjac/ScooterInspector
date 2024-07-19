@@ -1,2 +1,6 @@
 
 .env
+script.sh
+output.txt
+tlv_data.csv
+app.log
