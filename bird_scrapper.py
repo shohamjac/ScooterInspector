@@ -61,6 +61,10 @@ class BirdScrapper:
             return f"Failed to use magic link. Status code: {response.status_code}, Response: {response.text}"
 
     def get_new_token(self):
+        """
+        This function only perform the refresh, it does not update the object, for this, use `update_token`
+        :return: dict with the new tokens
+        """
         url = "https://api-auth.prod.birdapp.com/api/v1/auth/refresh/token"
 
         headers = {
@@ -110,15 +114,15 @@ class BirdScrapper:
             return response.json()
         else:
             print(response.text)
-            return f"Failed to retrieve scooter locations. Status code: {response.status_code}, Response: {response.text}"
+            self.logger.warning(f"Failed to retrieve scooter locations. Status code: {response.status_code}, Response: {response.text}")
 
     def get_city_scooters(self, location_list, radius) -> pd.DataFrame:
-        '''
+        """
         get all the scooters in the area defined by the grid location_list
         :param location_list: a list of locations in a tuple format (lon, lat)
         :param radius: the radius distance that covers
         :return:
-        '''
+        """
         scooter_locations = []
         for location in location_list:
             new_scooters = self.request_scooter_locations(location[0], location[1], radius)[
