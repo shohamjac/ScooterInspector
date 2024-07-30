@@ -5,3 +5,8 @@ output.txt
 tlv_data.csv
 app.log
 *.png
+/.idea
+*.pyc
+*.avi
+tel_aviv_scooter_heatmap.html
+/.idea
